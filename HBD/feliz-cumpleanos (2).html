@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¡Feliz Cumpleaños Princesa! 🎂</title>
+<style>
+  :root {
+    --lavanda: #e6d7f5;
+    --morado: #b48ade;
+    --morado-oscuro: #8a5fc4;
+    --rosa-pastel: #ffd9e8;
+    --verde-pastel: #d4f0d4;
+    --amarillo-pastel: #fff6c9;
+    --blanco: #fffdf9;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    min-height: 100vh;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: linear-gradient(135deg, var(--lavanda), var(--rosa-pastel) 50%, var(--amarillo-pastel));
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  .pantalla {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 16px;
+    position: relative;
+  }
+
+  .oculto { display: none !important; }
+
+  .fondo-animado {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .flotante {
+    position: absolute;
+    top: -60px;
+    font-size: 28px;
+    animation-name: caer;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    opacity: 0.85;
+  }
+
+  @keyframes caer {
+    0%   { transform: translateY(-10vh) rotate(0deg) translateX(0px); opacity: 0; }
+    10%  { opacity: 0.9; }
+    50%  { transform: translateY(50vh) rotate(180deg) translateX(20px); }
+    90%  { opacity: 0.9; }
+    100% { transform: translateY(110vh) rotate(360deg) translateX(-20px); opacity: 0; }
+  }
+
+  .tarjeta {
+    position: relative;
+    z-index: 2;
+    background: var(--blanco);
+    border-radius: 32px;
+    max-width: 560px;
+    width: 100%;
+    padding: 48px 32px 40px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(138, 95, 196, 0.35);
+    border: 4px solid var(--morado);
+    animation: aparecer 1s ease-out;
+  }
+
+  @keyframes aparecer {
+    from { opacity: 0; transform: translateY(40px) scale(0.9); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .corona {
+    font-size: 56px;
+    display: inline-block;
+    animation: balanceo 2.5s ease-in-out infinite;
+  }
+
+  @keyframes balanceo {
+    0%, 100% { transform: rotate(-8deg); }
+    50%      { transform: rotate(8deg); }
+  }
+
+  h1 {
+    color: var(--morado-oscuro);
+    font-size: clamp(1.5rem, 5vw, 2.4rem);
+    margin: 12px 0 6px;
+    text-shadow: 1px 1px 0 var(--rosa-pastel);
+  }
+
+  .subtitulo {
+    color: #a17bc9;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+
+  .decoracion-linea {
+    font-size: 1.4rem;
+    margin: 14px 0;
+    letter-spacing: 8px;
+  }
+
+  .mensaje {
+    color: #6b4f8a;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin: 20px 0;
+    padding: 0 8px;
+  }
+
+  .mensaje strong { color: var(--morado-oscuro); }
+
+  .granja-tulipanes {
+    font-size: 2rem;
+    margin: 24px 0 8px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .granja-tulipanes span {
+    display: inline-block;
+    animation: rebote 2s ease-in-out infinite;
+  }
+
+  .granja-tulipanes span:nth-child(2) { animation-delay: 0.2s; }
+  .granja-tulipanes span:nth-child(3) { animation-delay: 0.4s; }
+  .granja-tulipanes span:nth-child(4) { animation-delay: 0.6s; }
+  .granja-tulipanes span:nth-child(5) { animation-delay: 0.8s; }
+
+  @keyframes rebote {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-10px); }
+  }
+
+  .corazon-final {
+    font-size: 2.2rem;
+    margin-top: 20px;
+    animation: latido 1.2s ease-in-out infinite;
+  }
+
+  @keyframes latido {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.25); }
+  }
+
+  .firma {
+    margin-top: 24px;
+    color: #a17bc9;
+    font-size: 0.95rem;
+  }
+
+  .globo {
+    position: absolute;
+    font-size: 34px;
+    animation: flotarGlobo 4s ease-in-out infinite;
+    z-index: 2;
+  }
+
+  .globo1 { top: -20px; left: -10px; animation-delay: 0s; }
+  .globo2 { top: -30px; right: -14px; animation-delay: 1s; }
+
+  @keyframes flotarGlobo {
+    0%, 100% { transform: translateY(0) rotate(-4deg); }
+    50%      { transform: translateY(-18px) rotate(4deg); }
+  }
+
+  .candado-icono {
+    font-size: 50px;
+    margin-bottom: 8px;
+    animation: rebote 2.5s ease-in-out infinite;
+  }
+
+  .input-nombre {
+    margin: 24px auto 6px;
+    width: 80%;
+    max-width: 260px;
+    padding: 14px 16px;
+    font-size: 1.2rem;
+    text-align: center;
+    letter-spacing: 4px;
+    border: 3px solid var(--morado);
+    border-radius: 18px;
+    outline: none;
+    background: var(--lavanda);
+    color: var(--morado-oscuro);
+    font-family: inherit;
+    text-transform: uppercase;
+  }
+
+  .input-nombre::placeholder {
+    color: #b79bd6;
+    letter-spacing: normal;
+    text-transform: none;
+  }
+
+  .contador-letras {
+    color: #a17bc9;
+    font-size: 0.9rem;
+    margin-bottom: 18px;
+  }
+
+  .btn-continuar, .btn-volver {
+    background: var(--morado);
+    color: white;
+    border: none;
+    padding: 14px 36px;
+    border-radius: 20px;
+    font-size: 1.05rem;
+    font-family: inherit;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(138, 95, 196, 0.4);
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+
+  .btn-continuar:hover, .btn-volver:hover { background: var(--morado-oscuro); transform: translateY(-2px); }
+  .btn-continuar:active, .btn-volver:active { transform: translateY(0); }
+
+  .btn-continuar:disabled {
+    background: #d8c6ec;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+
+  .btn-volver {
+    background: transparent;
+    color: var(--morado-oscuro);
+    border: 2px solid var(--morado);
+    box-shadow: none;
+    margin-top: 18px;
+    font-size: 0.9rem;
+    padding: 10px 24px;
+  }
+
+  .aviso-error {
+    color: #d16b9e;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    min-height: 20px;
+  }
+
+  .mini-decor {
+    font-size: 1.6rem;
+    margin-top: 18px;
+    letter-spacing: 10px;
+  }
+
+  .control-musica {
+    position: fixed;
+    top: 18px;
+    right: 18px;
+    z-index: 10;
+    background: var(--blanco);
+    border: 3px solid var(--morado);
+    border-radius: 50%;
+    width: 54px;
+    height: 54px;
+    font-size: 1.4rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 16px rgba(138, 95, 196, 0.4);
+    transition: transform 0.2s ease;
+  }
+
+  .control-musica:hover { transform: scale(1.1); }
+  .control-musica:active { transform: scale(0.95); }
+</style>
+</head>
+<body>
+
+  <div class="fondo-animado" id="fondo"></div>
+
+  <!-- Reproductor de audio: usa el archivo cancion.m4a que debe estar en la misma carpeta -->
+  <audio id="audio-cancion" loop>
+    <source src="cancion.m4a" type="audio/mp4">
+  </audio>
+
+  <!-- Botón flotante para pausar/reanudar y mutear la música (aparece solo después del candado) -->
+  <button class="control-musica oculto" id="btn-musica" onclick="alternarMusica()" title="Pausar/Reanudar música">🔊</button>
+
+  <!-- PANTALLA 1: Candado / entrada de palabra -->
+  <div class="pantalla" id="pantalla-candado">
+    <div class="tarjeta">
+      <div class="candado-icono">🔐❤️‍🩹</div>
+      <h1>¡Un secreto te espera!</h1>
+      <p class="subtitulo">Escribe tu nombre o una palabra de 5 letras para continuar</p>
+
+      <input
+        type="text"
+        id="input-nombre"
+        class="input-nombre"
+        maxlength="5"
+        placeholder="_ _ _ _ _"
+        autocomplete="off"
+      >
+      <div class="contador-letras" id="contador">0 / 5 letras</div>
+
+      <button class="btn-continuar" id="btn-continuar" disabled>Continuar ❤️‍🩹</button>
+      <div class="aviso-error" id="aviso-error"></div>
+
+      <div class="mini-decor"> 🌟 🐄 🌟</div>
+    </div>
+  </div>
+
+  <!-- PANTALLA 2: La carta principal (aparece con cualquier palabra de 5 letras) -->
+  <div class="pantalla oculto" id="pantalla-carta">
+    <div class="tarjeta">
+      <div class="globo globo1">🎈</div>
+      <div class="globo globo2">🎈</div>
+
+      <div class="corona">👑</div>
+      <h1>¡Feliz Cumpleaños, mi Princesa!</h1>
+      <p class="subtitulo">Te deseo un feliz Cumpleaños ✨</p>
+
+      <div class="decoracion-linea"> 🌟 </div>
+
+      <p class="mensaje">
+        Eres la <strong>princesa</strong> de mi vida y el <strong>amor</strong> más sincero que me ha pasado.
+        Espero que tu día sea igual de maravilloso como vos, sabes lo mucho que te amo y lo mucho que me duele no poder estar hoy contigo.
+        Gracias por ser esa persona que me hace latir el corazon, recuerda que eres una persona única y especial, en esta vida no hay 2 como vos mi princesa
+        .
+      </p>
+
+      <div class="granja-tulipanes">
+        <span>🌷</span>
+        <span>🌙</span>
+      </div>
+
+      <p class="mensaje">
+        Recuerda lo valiosa que eres y <strong>NUNCA</strong> olvides que eres el amor de mi vida y por vos espero 100 años como Gabriel Garzía Márques. 🌟💜
+      </p>
+
+      <div class="corazon-final">🌟🐄</div>
+
+      <p class="firma"><strong>Te amó</strong> hoy y siempre 🐄🌷💜</p>
+      <button class="btn-volver" onclick="volverAlCandado()">🔙 Probar otra palabra</button>
+    </div>
+  </div>
+
+  <!-- EASTER EGG 1: palabra "VACAS" -->
+  <div class="pantalla oculto" id="pantalla-vacas">
+    <div class="tarjeta">
+      <div class="corona">🐄🌟</div>
+      <h1>¡Se que te encantan las vacas!</h1>
+      <p class="subtitulo">Un pequeño poema para <strong>mi princesa</strong>.</p>
+      <div class="decoracion-linea">🐄 🌟 🐄</div>
+      <p class="mensaje">
+        Me encanta cómo miras las vacas
+No puedo evitar sentir envidia de ellas
+Supongo que las amas más que yo
+Creo que al final del día me recuerdan a ti
+Así no estés conmigo siempre que veo una vaca
+Pienso en ti y eso es más patético que no
+decirte cuánto te amo cuando tuve la oportunidad
+      </p>
+      <div class="granja-tulipanes">
+        <span>🐄</span><span>🐄</span><span>🌟</span><span>🐄</span><span>🐄</span>
+      </div>
+      <button class="btn-volver" onclick="volverAlCandado()">🔙 Probar otra palabra</button>
+    </div>
+  </div>
+
+  <!-- EASTER EGG 2: palabra "LIRIO" -->
+  <div class="pantalla oculto" id="pantalla-lirio">
+    <div class="tarjeta">
+      <div class="corona">🌷💜</div>
+      <h1>¡Lirio para mi <strong>delirio</strong>!</h1>
+      <p class="subtitulo">Aunque ahora no pueda regalarte un jardin lleno de Lirios, te prometo que lo tendras</p>
+      <div class="decoracion-linea">🌷 🌸 🌷</div>
+      <p class="mensaje">
+        Es increíble lo mucho que una persona me pudo enamorar; jamás esperé sentir tanto por alguien; a veces me gusta recordar esas primeras conversaciones junto a ti, una de esas noches que, mientras nos reíamos como unos niños lastimados, me contabas lo mucho que amas los lirios y los tulipanes. Aunque suene estúpido, te prometo jamás regalarle ninguna de esas flores a nadie que no seas vos.
+
+      </p>
+      <div class="granja-tulipanes">
+        <span>🌷</span><span>🌸</span><span>🌟</span><span>🌸</span><span>🌷</span>
+      </div>
+      <button class="btn-volver" onclick="volverAlCandado()">🔙 Probar otra palabra</button>
+    </div>
+  </div>
+
+  <!-- EASTER EGG 3: palabra "TEAMO" -->
+  <div class="pantalla oculto" id="pantalla-teamo">
+    <div class="tarjeta">
+      <div class="corona">💜🌟</div>
+      <h1>Te amo</h1>
+      <p class="subtitulo">Aunque te lo he dicho una y mil veces</p>
+      <div class="decoracion-linea">🌟 💜 🌟</div>
+      <p class="mensaje">
+        Contigo conocí el amor; creo que entendí que es aquello que hacemos con tal de que la otra persona esté bien.
+        Perdóname si muchas veces no soy suficiente, aunque siempre lo intento. En mi vida <strong>nunca</strong> habrá alguien
+        Como tú, probablemente no sientas lo mismo que yo, pero eso no es tu culpa; eres y serás <strong>TODO</strong> en mi vida.
+      </p>
+      <div class="granja-tulipanes">
+        <span>💜</span><span>🌟</span><span>🐄</span><span>🌟</span><span>💜</span>
+      </div>
+      <button class="btn-volver" onclick="volverAlCandado()">🔙 Probar otra palabra</button>
+    </div>
+  </div>
+
+<script>
+  const simbolos = ['💜', '🌟', '🌷', '💗', '🐄', '🌸', '💐'];
+  const fondo = document.getElementById('fondo');
+  const cantidad = 22;
+
+  for (let i = 0; i < cantidad; i++) {
+    const elemento = document.createElement('div');
+    elemento.classList.add('flotante');
+    elemento.textContent = simbolos[Math.floor(Math.random() * simbolos.length)];
+    elemento.style.left = Math.random() * 100 + 'vw';
+    elemento.style.fontSize = (18 + Math.random() * 20) + 'px';
+    elemento.style.animationDuration = (6 + Math.random() * 8) + 's';
+    elemento.style.animationDelay = (Math.random() * 8) + 's';
+    fondo.appendChild(elemento);
+  }
+
+  const input = document.getElementById('input-nombre');
+  const contador = document.getElementById('contador');
+  const btn = document.getElementById('btn-continuar');
+  const aviso = document.getElementById('aviso-error');
+  const pantallaCandado = document.getElementById('pantalla-candado');
+  const audio = document.getElementById('audio-cancion');
+  const btnMusica = document.getElementById('btn-musica');
+
+  // Palabras mágicas -> id de la pantalla que abren.
+  // "PAULA" abre la carta principal. Las demás son sorpresas extra.
+  // Cualquier otra palabra de 5 letras muestra un aviso para intentar de nuevo.
+  const PALABRAS_MAGICAS = {
+    'PAULA': 'pantalla-carta',
+    'VACAS': 'pantalla-vacas',
+    'LIRIO': 'pantalla-lirio',
+    'TEAMO': 'pantalla-teamo'
+  };
+
+  input.addEventListener('input', () => {
+    input.value = input.value.replace(/[^a-zA-ZÀ-ÿñÑ]/g, '');
+    const largo = input.value.length;
+    contador.textContent = `${largo} / 5 letras`;
+    btn.disabled = largo !== 5;
+    aviso.textContent = '';
+  });
+
+  function irAPantalla(idDestino) {
+    pantallaCandado.style.transition = 'opacity 0.6s ease';
+    pantallaCandado.style.opacity = '0';
+    setTimeout(() => {
+      pantallaCandado.classList.add('oculto');
+      document.getElementById(idDestino).classList.remove('oculto');
+      btnMusica.classList.remove('oculto');
+      audio.muted = false;
+      btnMusica.textContent = '🔊';
+      audio.play().catch(() => {
+        console.log('Verifica que cancion.m4a esté en la misma carpeta que este HTML.');
+      });
+    }, 600);
+  }
+
+  function alternarMusica() {
+    if (audio.paused) {
+      audio.play();
+      btnMusica.textContent = '🔊';
+    } else {
+      audio.pause();
+      btnMusica.textContent = '🔇';
+    }
+  }
+
+  function volverAlCandado() {
+    document.querySelectorAll('.pantalla').forEach(p => p.classList.add('oculto'));
+    pantallaCandado.classList.remove('oculto');
+    pantallaCandado.style.opacity = '1';
+    input.value = '';
+    contador.textContent = '0 / 5 letras';
+    btn.disabled = true;
+    btnMusica.classList.add('oculto');
+    audio.pause();
+    audio.currentTime = 0;
+  }
+
+  btn.addEventListener('click', () => {
+    const palabra = input.value.toUpperCase();
+    if (palabra.length !== 5) {
+      aviso.textContent = 'Necesita tener exactamente 5 letras 💜';
+      return;
+    }
+    const destino = PALABRAS_MAGICAS[palabra];
+    if (!destino) {
+      aviso.textContent = 'Esa palabra no es correcta, intenta de nuevo 💜';
+      return;
+    }
+    irAPantalla(destino);
+  });
+
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !btn.disabled) btn.click();
+  });
+</script>
+
+</body>
+</html>
